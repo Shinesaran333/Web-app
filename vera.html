@@ -373,45 +373,43 @@ about section ///
 
 <script>
 // ── DATA ──
-const candleData = [
-  { name:'Vanilla Serenity', scent:'sweet', desc:'Warm vanilla bean & cashmere musk. Deeply comforting.', price:38, tag:'bestseller', img:'https://img.freepik.com/free-photo/two-candles-with-overlapping-shadows_24972-3035.jpg' },
-  { name:'Amber Glow', scent:'woody', desc:'Aged amber, sandalwood, and a whisper of tobacco.', price:42, tag:'new', img:'https://img.freepik.com/free-photo/candle-with-shadow-emphasizing-minimal-elegance_24972-3025.jpg' },
-  { name:'Lavender Dreams', scent:'floral', desc:'Provence lavender, clean linen, and a touch of vanilla.', price:36, tag:'', img:'https://img.freepik.com/free-photo/candle-with-soft-natural-lighting_24972-3055.jpg' },
-  { name:'Cedar & Rain', scent:'fresh', desc:'Pacific cedar, petrichor, and green moss after rainfall.', price:44, tag:'new', img:'https://img.freepik.com/free-photo/two-candles-with-overlapping-shadows_24972-3035.jpg' },
-  { name:'Rose Noir', scent:'floral', desc:'Midnight rose, black pepper, patchouli undertones.', price:48, tag:'sale', img:'https://img.freepik.com/free-photo/candle-with-shadow-emphasizing-minimal-elegance_24972-3025.jpg' },
-  { name:'Cardamom Kiss', scent:'spice', desc:'Cardamom, clove bud, and golden honey on warm wood.', price:40, tag:'', img:'https://img.freepik.com/free-photo/candle-with-soft-natural-lighting_24972-3055.jpg' },
-  { name:'Sea Breeze', scent:'fresh', desc:'Amalfi citrus, sea salt, and driftwood.', price:34, tag:'', img:'https://img.freepik.com/free-photo/two-candles-with-overlapping-shadows_24972-3035.jpg' },
-  { name:'Smoked Oud', scent:'woody', desc:'Deep oud, smoked resin, midnight woods.', price:56, tag:'new', img:'https://img.freepik.com/free-photo/candle-with-shadow-emphasizing-minimal-elegance_24972-3025.jpg' },
-];
-
-const shopData = [
-  { name:'Vanilla Serenity', type:'Jar Candles', price:38, img:'https://img.freepik.com/free-photo/two-candles-with-overlapping-shadows_24972-3035.jpg' },
-  { name:'Amber Glow Set', type:'Gift Sets', price:85, img:'https://img.freepik.com/free-photo/candle-with-shadow-emphasizing-minimal-elegance_24972-3025.jpg' },
-  { name:'Lavender Taper', type:'Taper Candles', price:28, img:'https://img.freepik.com/free-photo/candle-with-soft-natural-lighting_24972-3055.jpg' },
-  { name:'Cedar Pillar', type:'Pillar Candles', price:52, img:'https://img.freepik.com/free-photo/two-candles-with-overlapping-shadows_24972-3035.jpg' },
-  { name:'Rose Noir Jar', type:'Jar Candles', price:48, img:'https://img.freepik.com/free-photo/candle-with-shadow-emphasizing-minimal-elegance_24972-3025.jpg' },
-  { name:'The Vera Gift Set', type:'Gift Sets', price:110, img:'https://img.freepik.com/free-photo/candle-with-soft-natural-lighting_24972-3055.jpg' },
-  { name:'Sea Breeze Pillar', type:'Pillar Candles', price:44, img:'https://img.freepik.com/free-photo/two-candles-with-overlapping-shadows_24972-3035.jpg' },
-  { name:'Smoked Oud Jar', type:'Jar Candles', price:56, img:'https://img.freepik.com/free-photo/candle-with-shadow-emphasizing-minimal-elegance_24972-3025.jpg' },
-];
-
+let candleData = [];
+let currentShop = [];
 let cart = 0;
 let currentFilter = 'all';
-let currentShop = [...shopData];
+
+const loadData = async () => {
+  try {
+    const [candleRes, shopRes] = await Promise.all([
+      fetch('candles.json'),
+      fetch('shop.json')
+    ]);
+    candleData = await candleRes.json();
+    const shopData = await shopRes.json();
+    currentShop = [...shopData];
+  } catch (error) {
+    console.error('❌ Дата ачаалахад алдаа гарлаа:', error);
+  }
+};
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadData();
+});
 
 // ── NAVIGATION ──
-function showSection(name) {
+const showSection = async (name) => {
   ['home','candles','shop','about','contact'].forEach(s => {
-    const el = document.getElementById(s+'-section');
+    const el = document.getElementById(s + '-section');
     if (el) {
-      el.style.display = s === name ? (s==='home'?'block':'block') : 'none';
+      el.style.display = s === name ? 'block' : 'none';
       if (s !== 'home') el.classList.toggle('active', s === name);
     }
   });
   window.scrollTo({ top: 0, behavior: 'smooth' });
+  if (candleData.length === 0) await loadData();
   if (name === 'candles') renderCandles('all');
-  if (name === 'shop')    renderShop();
-}
+  if (name === 'shop') renderShop();
+};
 
 // ── CANDLES ──
 function renderCandles(filter) {
