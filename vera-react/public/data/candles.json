@@ -1,0 +1,10 @@
+[
+  { "name": "Vanilla Serenity", "scent": "sweet", "desc": "Warm vanilla bean & cashmere musk. Deeply comforting.", "price": 38, "tag": "bestseller", "img": "https://img.freepik.com/free-photo/two-candles-with-overlapping-shadows_24972-3035.jpg" },
+  { "name": "Amber Glow", "scent": "woody", "desc": "Aged amber, sandalwood, and a whisper of tobacco.", "price": 42, "tag": "new", "img": "https://img.freepik.com/free-photo/candle-with-shadow-emphasizing-minimal-elegance_24972-3025.jpg" },
+  { "name": "Lavender Dreams", "scent": "floral", "desc": "Provence lavender, clean linen, and a touch of vanilla.", "price": 36, "tag": "", "img": "https://img.freepik.com/free-photo/candle-with-soft-natural-lighting_24972-3055.jpg" },
+  { "name": "Cedar & Rain", "scent": "fresh", "desc": "Pacific cedar, petrichor, and green moss after rainfall.", "price": 44, "tag": "new", "img": "https://img.freepik.com/free-photo/two-candles-with-overlapping-shadows_24972-3035.jpg" },
+  { "name": "Rose Noir", "scent": "floral", "desc": "Midnight rose, black pepper, patchouli undertones.", "price": 48, "tag": "sale", "img": "https://img.freepik.com/free-photo/candle-with-shadow-emphasizing-minimal-elegance_24972-3025.jpg" },
+  { "name": "Cardamom Kiss", "scent": "spice", "desc": "Cardamom, clove bud, and golden honey on warm wood.", "price": 40, "tag": "", "img": "https://img.freepik.com/free-photo/candle-with-soft-natural-lighting_24972-3055.jpg" },
+  { "name": "Sea Breeze", "scent": "fresh", "desc": "Amalfi citrus, sea salt, and driftwood.", "price": 34, "tag": "", "img": "https://img.freepik.com/free-photo/two-candles-with-overlapping-shadows_24972-3035.jpg" },
+  { "name": "Smoked Oud", "scent": "woody", "desc": "Deep oud, smoked resin, midnight woods.", "price": 56, "tag": "new", "img": "https://img.freepik.com/free-photo/candle-with-shadow-emphasizing-minimal-elegance_24972-3025.jpg" }
+]

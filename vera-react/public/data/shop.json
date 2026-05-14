@@ -1,0 +1,10 @@
+[
+  { "name": "Vanilla Serenity", "type": "Jar Candles", "price": 38, "img": "https://img.freepik.com/free-photo/two-candles-with-overlapping-shadows_24972-3035.jpg" },
+  { "name": "Amber Glow Set", "type": "Gift Sets", "price": 85, "img": "https://img.freepik.com/free-photo/candle-with-shadow-emphasizing-minimal-elegance_24972-3025.jpg" },
+  { "name": "Lavender Taper", "type": "Taper Candles", "price": 28, "img": "https://img.freepik.com/free-photo/candle-with-soft-natural-lighting_24972-3055.jpg" },
+  { "name": "Cedar Pillar", "type": "Pillar Candles", "price": 52, "img": "https://img.freepik.com/free-photo/two-candles-with-overlapping-shadows_24972-3035.jpg" },
+  { "name": "Rose Noir Jar", "type": "Jar Candles", "price": 48, "img": "https://img.freepik.com/free-photo/candle-with-shadow-emphasizing-minimal-elegance_24972-3025.jpg" },
+  { "name": "The Vera Gift Set", "type": "Gift Sets", "price": 110, "img": "https://img.freepik.com/free-photo/candle-with-soft-natural-lighting_24972-3055.jpg" },
+  { "name": "Sea Breeze Pillar", "type": "Pillar Candles", "price": 44, "img": "https://img.freepik.com/free-photo/two-candles-with-overlapping-shadows_24972-3035.jpg" },
+  { "name": "Smoked Oud Jar", "type": "Jar Candles", "price": 56, "img": "https://img.freepik.com/free-photo/candle-with-shadow-emphasizing-minimal-elegance_24972-3025.jpg" }
+]
