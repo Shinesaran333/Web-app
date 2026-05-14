@@ -82,90 +82,7 @@
   </footer>
 </div>
 
-<!--Candles -->
-<div id="candles-section" class="page-section">
-  <!-- Sticky nav clone -->
-  <div style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:center;padding:14px 20px;background:rgba(246,243,238,0.85);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,0.06);">
-    <div class="nav-wrapper" style="position:static;top:unset;margin:0;">
-      <div class="nav-container">
-        <button class="nav-btn" onclick="showSection('home')">Home</button>
-        <button class="nav-btn active-nav" onclick="showSection('candles')">Candles</button>
-        <button class="nav-btn" onclick="showSection('shop')">Shop <span class="cart-badge" id="cart-count-c">0</span></button>
-        <button class="nav-btn" onclick="showSection('about')">About</button>
-        <button class="nav-btn" onclick="showSection('contact')">Contact</button>
-      </div>
-      <button class="nav-btn login" onclick="openLoginModal()">Log In</button>
-    </div>
-  </div>
-
-  <div class="section-heading">Candle Collection</div>
-  <div class="section-sub">SCENTS FOR EVERY MOOD</div>
-  <div class="section-divider"></div>
-
-  <div class="filter-bar" id="filter-bar">
-    <button class="filter-chip active" onclick="filterCandles(this,'all')">All</button>
-    <button class="filter-chip" onclick="filterCandles(this,'floral')">🌸 Floral</button>
-    <button class="filter-chip" onclick="filterCandles(this,'woody')">🌲 Woody</button>
-    <button class="filter-chip" onclick="filterCandles(this,'fresh')">🌿 Fresh</button>
-    <button class="filter-chip" onclick="filterCandles(this,'sweet')">🍯 Sweet</button>
-    <button class="filter-chip" onclick="filterCandles(this,'spice')">🌶 Spice</button>
-  </div>
-
-  <div class="candles-grid" id="candles-grid">
-    <!-- Populated by JS -->
-  </div>
-</div>
-
-<!--shop -->
-<div id="shop-section" class="page-section">
-  <div style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:center;padding:14px 20px;background:rgba(246,243,238,0.85);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,0.06);">
-    <div class="nav-wrapper" style="position:static;top:unset;margin:0;">
-      <div class="nav-container">
-        <button class="nav-btn" onclick="showSection('home')">Home</button>
-        <button class="nav-btn" onclick="showSection('candles')">Candles</button>
-        <button class="nav-btn active-nav" onclick="showSection('shop')">Shop <span class="cart-badge" id="cart-count-s">0</span></button>
-        <button class="nav-btn" onclick="showSection('about')">About</button>
-        <button class="nav-btn" onclick="showSection('contact')">Contact</button>
-      </div>
-      <button class="nav-btn login" onclick="openLoginModal()">Log In</button>
-    </div>
-  </div>
-
-  <div class="section-heading">Shop</div>
-  <div class="section-sub">HAND-POURED. SMALL BATCH. YOURS.</div>
-  <div class="section-divider"></div>
-
-  <div class="shop-layout">
-    <aside class="shop-sidebar">
-      <div class="sidebar-group">
-        <div class="sidebar-title">Category</div>
-        <label class="sidebar-option"><input type="checkbox" checked onchange="applyShopFilter()"> Pillar Candles</label>
-        <label class="sidebar-option"><input type="checkbox" checked onchange="applyShopFilter()"> Jar Candles</label>
-        <label class="sidebar-option"><input type="checkbox" checked onchange="applyShopFilter()"> Taper Candles</label>
-        <label class="sidebar-option"><input type="checkbox" checked onchange="applyShopFilter()"> Gift Sets</label>
-      </div>
-      <div class="sidebar-group">
-        <div class="sidebar-title">Price Range</div>
-        <input type="range" class="price-range" min="10" max="120" value="120" id="price-slider" oninput="updatePrice(this)">
-        <div class="price-display" id="price-display">Up to $120</div>
-      </div>
-      <div class="sidebar-group">
-        <div class="sidebar-title">Sort By</div>
-        <select onchange="sortShop(this.value)" style="width:100%;padding:10px;border-radius:10px;border:1px solid #ddd;font-family:'Sora',sans-serif;font-size:13px;background:#fff;cursor:pointer;outline:none;">
-          <option value="featured">Featured</option>
-          <option value="price-low">Price: Low → High</option>
-          <option value="price-high">Price: High → Low</option>
-          <option value="newest">Newest</option>
-        </select>
-      </div>
-    </aside>
-    <div class="shop-grid" id="shop-grid">
-      <!-- example  -->
-    </div>
-  </div>
-</div>
-
-about section /// 
+<!--about -->
 <div id="about-section" class="page-section">
   <div style="position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:center;padding:14px 20px;background:rgba(246,243,238,0.85);backdrop-filter:blur(14px);border-bottom:1px solid rgba(0,0,0,0.06);">
     <div class="nav-wrapper" style="position:static;top:unset;margin:0;">
@@ -398,78 +315,21 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 // ── NAVIGATION ──
 const showSection = async (name) => {
-  ['home','candles','shop','about','contact'].forEach(s => {
+  if (name === 'candles') {
+    window.location.href = 'http://localhost:5173/?page=candles';
+    return;
+  }
+  if (name === 'shop') {
+    window.location.href = 'http://localhost:5173/?page=shop';
+    return;
+  }
+
+  ['home','about','contact'].forEach(s => {
     const el = document.getElementById(s + '-section');
-    if (el) {
-      el.style.display = s === name ? 'block' : 'none';
-      if (s !== 'home') el.classList.toggle('active', s === name);
-    }
+    if (el) el.style.display = s === name ? 'block' : 'none';
   });
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  if (candleData.length === 0) await loadData();
-  if (name === 'candles') renderCandles('all');
-  if (name === 'shop') renderShop();
 };
-
-// ── CANDLES ──
-function renderCandles(filter) {
-  const grid = document.getElementById('candles-grid');
-  const data = filter === 'all' ? candleData : candleData.filter(c => c.scent === filter);
-  grid.innerHTML = data.map(c => `
-    <div class="candle-card">
-      <img src="${c.img}" alt="${c.name}">
-      <div class="candle-card-body">
-        <div class="candle-card-name">${c.name}</div>
-        <div class="candle-card-desc">${c.desc}</div>
-        <div class="candle-card-footer">
-          <div class="candle-price">$${c.price}</div>
-          ${c.tag ? `<span class="candle-tag ${c.tag==='new'?'new':c.tag==='sale'?'sale':''}">${c.tag}</span>` : ''}
-        </div>
-        <button class="add-cart-btn" onclick="addToCart('${c.name}')">+ Add to Cart</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function filterCandles(btn, filter) {
-  document.querySelectorAll('.filter-chip').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  currentFilter = filter;
-  renderCandles(filter);
-}
-
-// ── SHOP ──
-function renderShop() {
-  const maxPrice = parseInt(document.getElementById('price-slider').value);
-  const grid = document.getElementById('shop-grid');
-  const filtered = currentShop.filter(i => i.price <= maxPrice);
-  grid.innerHTML = filtered.map(i => `
-    <div class="shop-item">
-      <img src="${i.img}" alt="${i.name}">
-      <button class="wishlist-btn" onclick="showToast('Added to wishlist 🤍')">♡</button>
-      <div class="shop-item-body">
-        <div class="shop-item-name">${i.name}</div>
-        <div class="shop-item-price">$${i.price}</div>
-        <button class="add-cart-btn" onclick="addToCart('${i.name}')">+ Add to Cart</button>
-      </div>
-    </div>
-  `).join('');
-}
-
-function updatePrice(el) {
-  document.getElementById('price-display').textContent = `Up to $${el.value}`;
-  renderShop();
-}
-
-function applyShopFilter() { renderShop(); }
-
-function sortShop(val) {
-  if (val === 'price-low') currentShop = [...shopData].sort((a,b) => a.price - b.price);
-  else if (val === 'price-high') currentShop = [...shopData].sort((a,b) => b.price - a.price);
-  else if (val === 'newest') currentShop = [...shopData].reverse();
-  else currentShop = [...shopData];
-  renderShop();
-}
 
 // ── CART ──
 function addToCart(name) {
