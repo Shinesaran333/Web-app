@@ -8,7 +8,7 @@ const CandlesSection = () => {
   useEffect(() => {
     const loadCandles = async () => {
       try {
-        const res = await fetch("/data/candles.json");
+        const res = await fetch("http://localhost:3000/api/candles");
         const data = await res.json();
         setCandleData(data);
       } catch (err) {

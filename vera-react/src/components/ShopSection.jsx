@@ -14,7 +14,7 @@ const ShopSection = () => {
   useEffect(() => {
     const loadShop = async () => {
       try {
-        const res = await fetch("/data/shop.json");
+        const res = await fetch("http://localhost:3000/api/shop");
         const data = await res.json();
         setShopData(data);
       } catch (err) {
